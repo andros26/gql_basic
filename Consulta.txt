@@ -1,0 +1,9 @@
+query{
+  
+  getCartoons{
+    id, city
+  }
+  getPeople{
+    id, email
+  }
+}
