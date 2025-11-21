@@ -1,3 +1,6 @@
+YouTobe:
+https://www.youtube.com/watch?v=KbWkykamvJ8
+
 Lab4:
 -----
 
@@ -9,4 +12,46 @@ query{
   getPeople{
     id, email
   }
+}
+
+-------------------------------------------------------------------------
+
+query{
+ getPersonByName(name: "John Smith"){
+  id, name, email
+ }
+}
+
+mutation {
+  createPerson(input: {
+    name: "JOVANNY ALVAREZ",
+    dateOfBirth: "1989-01-26",
+    address: "Medellin - Milagrosa",
+    email: "jovanny@gmail.com"
+  }) {
+    id
+    name
+    dateOfBirth
+    address
+    email
+  }
+}
+
+mutation {
+  updatePerson(id: "51", input: {
+    name: "JOVANNY ALVAREZ",
+    dateOfBirth: "1989-01-26",
+    address: "Medellin - Buenos Aires",
+    email: "jovanny.alvarez@gmail.com"
+  }) {
+    id
+    name
+    dateOfBirth
+    address
+    email
+  }
+}
+
+mutation{
+  deletePerson(id: "51")
 }
