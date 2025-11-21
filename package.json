@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "compile": "tsc",
+    "start": "ts-node ./src/index.ts",
     "dev": "nodemon src/index.ts --exec ts-node src/index.ts -e ts,graphql"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/utils": "^10.2.0",
     "apollo-server-core": "^3.13.0",
     "apollo-server-express": "^3.13.0",
     "cors": "^2.8.5",
