@@ -56,8 +56,41 @@ mutation{
   deletePerson(id: "51")
 }
 
----------------------------------- RUN DOCKER ---------------------------------------
+------------------------------------- RUN DOCKER -------------------------------------
 
 docker-compose up -d
 
 http://localhost:37111/graphql
+
+
+
+
+-------------------------------------- MONGODB ---------------------------------------
+YouTobe:
+https://www.youtube.com/watch?v=8s3XMWrzjFg
+
+Lab6:
+
+https://robomongo.org/download.php
+
+npm i
+docker-compose up -d
+
+npm i mongodb
+
+http://localhost:4000/graphql
+
+
+  createPersonInMongo(person:{
+    name: "JOVANNY ALVAREZ",
+    dateOfBirth: "1989-01-26",
+    address: "Medellin - Buenos Aires",
+    email: "jovanny.alvarez@gmail.com"
+  })
+}
+
+query{
+  getPeopleInMongo{
+    _id, name
+  }
+}

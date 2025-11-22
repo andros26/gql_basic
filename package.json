@@ -15,12 +15,14 @@
     "apollo-server-core": "^3.13.0",
     "apollo-server-express": "^3.13.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "graphql": "^16.8.1",
     "graphql-import-node": "^0.0.5",
     "graphql-merge-resolvers": "^1.1.16",
     "graphql-tools": "^9.0.1",
     "graphql-tools-merge-typedefs": "^2.0.1",
+    "mongodb": "^5.9.2",
     "ncp": "^2.0.0"
   },
   "devDependencies": {
