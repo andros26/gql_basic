@@ -1,9 +1,9 @@
 import { IResolvers } from '@graphql-tools/utils';
-import { peopleDataSource } from '../../data/peopledata';
-import { Db } from 'mongodb';
+import { Db } from 'mongodb'; // Asegúrate de que Db esté importado
 
 const peopleResolver: IResolvers = {
     Query: {
+        // Mantenemos este Query que usa MongoDB
         getPeopleInMongo: async (parent, args, context: Db) => {
             try {
                 return await context.collection('people').find().toArray() ?? [];
@@ -11,12 +11,10 @@ const peopleResolver: IResolvers = {
                 console.log(error);
             }
         },
-        getPeople: () => peopleDataSource,
-        getPersonByName: (parent, { name }) => {
-            return peopleDataSource.filter(peopleDataSource => peopleDataSource.name.toLowerCase().includes(name.toLowerCase()));
-        }
+        // *** SE ELIMINARON: getPeople y getPersonByName (usaban peopleDataSource) ***
     },
     Mutation: {
+        // Mantenemos esta Mutation que usa MongoDB
         createPersonInMongo: async (root: void, args: any, context: Db) => {
             try {
                 const person = await context.collection('people').insertOne(args.person);
@@ -25,38 +23,8 @@ const peopleResolver: IResolvers = {
                 console.log(error);
             }
         },
-        createPerson: (parent, { input }) => {
-            const newPerson = {
-                _id: String(peopleDataSource.length + 1),
-                ...input
-            };
-            peopleDataSource.push(newPerson);
-            return newPerson;
-        },
-        updatePerson: (parent, { _id, input }) => {
-            const personIndex = peopleDataSource.findIndex(person => person._id === _id);
-            if (personIndex !== -1) {
-                const updatedPerson = {
-                    _id,
-                    ...input
-                };
-                peopleDataSource[personIndex] = updatedPerson;
-                return updatedPerson;
-            }
-            throw new Error("Person not found");
-        },
-        deletePerson: (parent, { _id }) => {
-            const personIndex = peopleDataSource.findIndex(person => person._id === _id);
-            if (personIndex !== -1) {
-                peopleDataSource.splice(personIndex, 1);
-                return true;
-            }
-            throw new Error("Person not found");
-        }
+        // *** SE ELIMINARON: createPerson, updatePerson, y deletePerson (usaban peopleDataSource) ***
     }
 }
-
-
-
 
 export default peopleResolver;
