@@ -1,0 +1,77 @@
+# Definición de la estructura de un Libro
+type Book {
+    _id: ID!
+    title: String!
+    author: String!
+    publicationYear: Int!
+    coverImage: String # URL de la imagen (opcional)
+    ownerId: ID! # ID del Usuario que añadió este libro (FK a User)
+    reviews: [Review]
+    averageRating: Float
+}
+
+# Definición de la estructura de una Reseña/Calificación
+type Review {
+    _id: ID!
+    bookId: ID! # ID del libro reseñado
+    userId: ID! # ID del usuario que hizo la reseña
+    rating: Int! # 1 a 5 estrellas
+    comment: String
+}
+
+# Input para crear o editar un Libro
+input BookInput {
+    title: String!
+    author: String!
+    publicationYear: Int!
+    coverImage: String
+}
+
+# Input para editar campos opcionales del Libro
+input BookEditInput {
+    title: String
+    author: String
+    publicationYear: Int
+    coverImage: String
+}
+
+# Input para añadir una Reseña
+input ReviewInput {
+    bookId: ID!
+    rating: Int! # Debe estar entre 1 y 5
+    comment: String
+}
+
+# -----------------------------------------------------------
+# QUERIES (Lectura)
+# -----------------------------------------------------------
+
+type Query {
+    # 2. Listar todos los libros (general)
+    getBooks: [Book]
+    
+    # 2. Listar libros de un usuario específico
+    getBooksByOwner(ownerId: ID!): [Book]
+    
+    # Obtener un libro por ID
+    getBook(id: ID!): Book
+}
+
+
+# -----------------------------------------------------------
+# MUTATIONS (Escritura)
+# -----------------------------------------------------------
+
+type Mutation {
+    # 1. Añadir un libro a la colección de un usuario
+    addBook(ownerId: ID!, input: BookInput!): Book
+    
+    # 2. Editar un libro
+    editBook(id: ID!, input: BookEditInput!): Book
+    
+    # 2. Eliminar un libro
+    deleteBook(id: ID!): Boolean
+    
+    # 3. Añadir una calificación y reseña
+    addReview(userId: ID!, input: ReviewInput!): Review
+}

@@ -1,0 +1,58 @@
+# -----------------------------------------------------------
+# TIPOS DE DATOS
+# -----------------------------------------------------------
+
+type User {
+    # ID proporcionado por MongoDB
+    _id: ID! 
+    name: String!
+    lastname: String!
+    email: String!
+    password: String!
+   
+}
+
+input UserInput {
+    # Input para registro y edición.
+    name: String!
+    lastname: String!
+    email: String!
+    password: String! 
+}
+
+# Input simplificado para la edición (permite enviar solo los campos que cambian)
+input UserEditInput {
+    name: String
+    lastname: String
+    email: String
+    password: String
+}
+
+
+# -----------------------------------------------------------
+# QUERIES (Lectura)
+# -----------------------------------------------------------
+
+type Query {
+    # b. Funcionalidad para listar usuarios
+    getUsers: [User]
+    
+    # Opcional: Obtener un usuario específico por ID
+    getUser(id: ID!): User
+}
+
+
+# -----------------------------------------------------------
+# MUTATIONS (Escritura: Registro, Edición y Eliminación)
+# -----------------------------------------------------------
+
+type Mutation {
+    # a. Registro de usuario (usa UserInput)
+    registerUser(input: UserInput!): User
+    
+    # b. Edición de usuario (usa UserEditInput, que permite campos opcionales)
+    editUser(id: ID!, input: UserEditInput!): User
+    
+    # b. Eliminación de usuario
+    deleteUser(id: ID!): Boolean
+}

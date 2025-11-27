@@ -97,3 +97,68 @@ query{
 
 
 
+Librería Digital:
+----------------
+
+mutation RegistrarUsuario {
+  registerUser(
+    input: {
+      name: "Jovanny Andres"
+      lastname: "Alvarez"
+      email: "jovanny@gmail.com"
+      password: "itm.2025"
+    }
+  ) {
+    # Campos que deseas que el servidor te devuelva tras el registro exitoso
+    _id
+    name
+    email
+    # Incluimos password, según tu solicitud para el ejercicio académico
+    password 
+  }
+}
+
+
+mutation AdjuntarNuevoLibro {
+  addBook(
+    # 1. ID del usuario dueño del libro (debe ser un ID existente en tu colección 'users')
+    ownerId: "6923ab48da41415653382898" 
+    
+    # 2. Objeto 'input' con los detalles del libro
+    input: {
+      title: "Cien años de soledad"
+      author: "Gabriel García Márquez"
+      publicationYear: 1967
+      coverImage: "https://ejemplo.com/cien-anios-soledad.jpg" # URL de la imagen (opcional)
+    }
+  ) {
+    # Campos que deseas que el servidor devuelva (tipo Book)
+    _id
+    title
+    author
+    ownerId
+    averageRating # Será 0.0 inicialmente
+  }
+}
+
+
+mutation RegistrarResena {
+  addReview(
+    # 1. ID del usuario que califica
+    userId: "6923ab48da41415653382898" 
+    
+    # 2. Objeto 'input' con los detalles de la reseña
+    input: {
+      bookId: "6923ac55da41415653382899" 
+      rating: 5 # Calificación de 1 a 5
+      comment: "Una obra maestra que todo el mundo debería leer. Me encantó la profundidad de los personajes."
+    }
+  ) {
+    # Campos que deseas que el servidor devuelva (tipo Review)
+    _id
+    bookId
+    userId
+    rating
+    comment
+  }
+}
